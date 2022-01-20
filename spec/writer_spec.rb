@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe CliSpinnable::Writer do
@@ -5,6 +7,7 @@ describe CliSpinnable::Writer do
   let(:line_mock) do
     Class.new do
       attr_accessor :str, :sign, :newline
+
       def to_s_resetting_newline
         'Text'
       end

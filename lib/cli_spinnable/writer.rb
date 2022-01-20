@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CliSpinnable
   class Writer
     class Error < CliSpinnableError; end
@@ -43,6 +45,7 @@ module CliSpinnable
 
     def push(attr, val)
       raise Error, 'Session finalized' unless session.status
+
       queue.push([attr, val])
     end
 
@@ -54,6 +57,7 @@ module CliSpinnable
             break if queue.empty?
           end
           break if Thread.current[:finalize]
+
           sleep REFRESH_DELAY_IN_SECONDS
         end
       end

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module CliSpinnable
   class Line
     class Error < CliSpinnableError; end
 
-    CARRIAGE_RETURN = "\r".freeze
-    NEWLINE = "\n".freeze
+    CARRIAGE_RETURN = "\r"
+    NEWLINE = "\n"
 
     attr_accessor :newline
 
@@ -18,7 +20,7 @@ module CliSpinnable
     end
 
     def <<(arg)
-      str << ensure_single_line(String(arg))
+      str = str.to_s + ensure_single_line(String(arg))
     end
 
     def str=(arg)
@@ -35,11 +37,13 @@ module CliSpinnable
 
     def ensure_single_line(str)
       raise Error, 'Multiline strings not allowed' if str.include?(NEWLINE)
+
       str
     end
 
     def newline_with_reset
       return unless newline
+
       self.newline = false
       NEWLINE
     end

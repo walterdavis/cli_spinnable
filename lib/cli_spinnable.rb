@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'cli_spinnable/version'
 require 'cli_spinnable/cli_spinnable_error'
 require 'cli_spinnable/line/colourable_string'
@@ -8,7 +10,7 @@ require 'cli_spinnable/writer'
 module CliSpinnable
   module Methods
     def with_spinner
-      writer = Writer.new(STDOUT, Line.new)
+      writer = Writer.new($stdout, Line.new)
       yield writer
       writer.finalize
       self

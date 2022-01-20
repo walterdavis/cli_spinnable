@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CliSpinnable
   class Line
     class Sign
@@ -5,12 +7,12 @@ module CliSpinnable
 
       class Error < CliSpinnableError; end
 
-      SPIN = %w(- \\ | /).freeze
+      SPIN = %w[- \\ | /].freeze
       TICK = "\u2713".green.freeze
       FAIL = "\u00d7".red.freeze
-      BLANK = ''.freeze
+      BLANK = ''
 
-      AVAILABLE_SIGNS = %i(spin tick fail blank).freeze
+      AVAILABLE_SIGNS = %i[spin tick fail blank].freeze
 
       def initialize(sign = nil)
         self.sign = sign || :blank
@@ -18,6 +20,7 @@ module CliSpinnable
 
       def sign=(sign)
         raise Error, "Unavailable sign: #{sign || 'nil'}" unless AVAILABLE_SIGNS.include?(sign)
+
         @sign = sign
         self
       end
