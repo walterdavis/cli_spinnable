@@ -10,7 +10,7 @@ module CliSpinnable
     attr_accessor :newline
 
     def initialize(str = nil, sign = nil, newline = nil)
-      self.str = str
+      @arr = [str]
       @sign = Sign.new(sign)
       self.newline = newline
     end
@@ -20,20 +20,25 @@ module CliSpinnable
     end
 
     def <<(arg)
-      @str = @str.to_s + ensure_single_line(String(arg))
+      arr << ensure_single_line(String(arg))
     end
 
     def str=(arg)
-      @str = ensure_single_line(String(arg))
+      self.arr = [ensure_single_line(String(arg))]
     end
 
     def to_s_resetting_newline
       [CARRIAGE_RETURN, sign, str, newline_with_reset].join
     end
+    
+    def str
+      arr.join
+    end
 
     private
 
-    attr_reader :str, :sign
+    attr_reader :sign
+    attr_accessor :arr
 
     def ensure_single_line(str)
       raise Error, 'Multiline strings not allowed' if str.include?(NEWLINE)
