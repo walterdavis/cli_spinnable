@@ -20,7 +20,7 @@ module CliSpinnable
     end
 
     def <<(arg)
-      str = str.to_s + ensure_single_line(String(arg))
+      @str = @str.to_s + ensure_single_line(String(arg))
     end
 
     def str=(arg)
