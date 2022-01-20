@@ -7,7 +7,7 @@ module CliSpinnable
 
       class Error < CliSpinnableError; end
 
-      SPIN = %w[- \\ | /].freeze
+      SPIN = %w[+ ×].freeze
       TICK = "\u2713".green.freeze
       FAIL = "\u00d7".red.freeze
       BLANK = ''
